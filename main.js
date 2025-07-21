@@ -2,6 +2,16 @@ const { app, BrowserWindow, screen } = require("electron");
 const session = require("electron").session;
 const path = require("path");
 const fs = require("fs");
+const os = require("os");
+
+// Base data directory in Documents
+const homeDir = os.homedir();
+const dataDir = path.join(homeDir, "Documents", "YTheatre");
+const extensionsDir = path.join(dataDir, "extensions");
+const configPath = path.join(dataDir, "config.ini");
+
+// Ensure folders exist
+fs.mkdirSync(extensionsDir, { recursive: true });
 
 // Default configuration
 let config = {
@@ -10,18 +20,23 @@ let config = {
   defaultWidth: 1920,
   defaultHeight: 1080,
   insetTitleBar: true,
-  adBlock: true,
-  sponsorBlock: true,
-  controllerSupport: true,
 };
 
 // Parse config.ini
 function parseConfig() {
-  const configPath = path.join(__dirname, "config.ini");
-  if (!fs.existsSync(configPath)) return;
+  if (!fs.existsSync(configPath)) {
+    const defaultConfig = `
+startInFullScreen=false
+preferedDisplay=1
+defaultWidth=1920
+defaultHeight=1080
+insetTitleBar=true
+`;
+    fs.writeFileSync(configPath, defaultConfig.trim());
+  }
 
   const data = fs.readFileSync(configPath, "utf-8");
-  const lines = data.split("\n");
+  const lines = data.split(/\r?\n/);
 
   lines.forEach((line) => {
     const [key, value] = line.split("=").map((item) => item.trim());
@@ -29,7 +44,7 @@ function parseConfig() {
       if (typeof config[key] === "boolean") {
         config[key] = value.toLowerCase() === "true";
       } else if (typeof config[key] === "number") {
-        config[key] = parseInt(value);
+        config[key] = parseInt(value, 10);
       }
     }
   });
@@ -44,16 +59,11 @@ const createWindow = () => {
   );
   const display = displays[displayIndex];
 
-  // Prepare preload scripts
-  const preloadScripts = [path.join(__dirname, "scripts/titlebar.js")];
-  if (config.controllerSupport) {
-    preloadScripts.push(path.join(__dirname, "scripts/controller.js"));
-  }
-
   // Window configuration
   const winOptions = {
     width: config.defaultWidth,
     height: config.defaultHeight,
+    icon: path.join(__dirname, "images/icon.ico"),
     x:
       display.bounds.x +
       Math.round((display.bounds.width - config.defaultWidth) / 2),
@@ -62,14 +72,10 @@ const createWindow = () => {
       Math.round((display.bounds.height - config.defaultHeight) / 2),
     fullscreen: config.startInFullScreen,
     webPreferences: {
-      preload: path.join(__dirname, "scripts/preload.js"),
-      additionalArguments: [
-        config.controllerSupport ? "--controller-support" : "",
-      ],
+      preload: path.join(__dirname, "scripts/inject.js"),
     },
   };
 
-  // Titlebar configuration
   if (config.insetTitleBar) {
     winOptions.titleBarStyle = "hidden";
     winOptions.titleBarOverlay = {
@@ -82,25 +88,29 @@ const createWindow = () => {
   const win = new BrowserWindow(winOptions);
   win.setMenuBarVisibility(false);
 
+  // Load YouTube first so win.webContents exists
   win.loadURL("https://www.youtube.com/", {
     userAgent: "GoogleTV/092754",
   });
 };
 
 app.whenReady().then(async () => {
-  parseConfig(); // Load configuration
-
-  // Load extensions conditionally
-  const extensions = [];
-  if (config.adBlock) extensions.push("adblock");
-  if (config.sponsorBlock) extensions.push("sponsorblock");
-
-  for (const ext of extensions) {
-    await session.defaultSession.loadExtension(
-      path.join(__dirname, `extensions/${ext}`),
-      { allowFileAccess: true }
-    );
+  parseConfig();
+  if (fs.existsSync(extensionsDir)) {
+    const extFolders = fs
+      .readdirSync(extensionsDir, { withFileTypes: true })
+      .filter((dirent) => dirent.isDirectory())
+      .map((dirent) => dirent.name);
+    for (const ext of extFolders) {
+      try {
+        await session.defaultSession.extensions.loadExtension(
+          path.join(extensionsDir, ext),
+          { allowFileAccess: true }
+        );
+      } catch (err) {
+        alert(`Failed to load extension ${ext}:`, err);
+      }
+    }
   }
-
   createWindow();
 });

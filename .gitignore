@@ -1,4 +1,5 @@
 node_modules
+build
 desktop.ini
 .DS_STORE
 dist

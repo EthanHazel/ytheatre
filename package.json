@@ -1,15 +1,17 @@
 {
-  "name": "youtube-theatre-electron",
+  "name": "ytheatre",
+  "productName": "YTheatre",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "package": "electron-packager . --overwrite --platform=win32 --icon=images/icon.ico --ignore=.git --ignore=.gitignore --prune=true --out=build"
   },
-  "author": "",
+  "author": "Ethan Hazel",
   "license": "ISC",
-  "description": "",
+  "description": "Simple youtube client that uses the TV interface with basic extension support",
   "devDependencies": {
-    "electron": "^37.2.2"
+    "electron": "^37.2.2",
+    "electron-packager": "^17.1.2"
   }
 }
