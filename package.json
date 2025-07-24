@@ -1,17 +1,13 @@
 {
   "name": "ytheatre",
   "productName": "YTheatre",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "main.js",
   "homepage": "https://www.ytheatre.app",
   "repository": "https://github.com/EthanHazel/ytheatre",
-  "publish": {
-    "provider": "github",
-    "releaseType": "release"
-  },
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder"
+    "build": "electron-builder -p always"
   },
   "build": {
     "appId": "com.ytheatre.app",
@@ -21,7 +17,15 @@
     },
     "directories": {
       "output": "build"
-    }
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "repo": "ytheatre",
+        "owner": "EthanHazel",
+        "releaseType": "release"
+      }
+    ]
   },
   "author": "Ethan Hazel",
   "license": "ISC",

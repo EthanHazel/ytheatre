@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Check out my cool update test function guys");
   Object.assign(document.body.appendChild(document.createElement("div")), {
     id: "drag",
     style: `
