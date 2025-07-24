@@ -3,15 +3,34 @@
   "productName": "YTheatre",
   "version": "1.0.0",
   "main": "main.js",
+  "homepage": "https://www.ytheatre.app",
+  "repository": "https://github.com/EthanHazel/ytheatre",
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
+  },
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager . --overwrite --platform=win32 --icon=images/icon.ico --ignore=.git --ignore=.gitignore --prune=true --out=build"
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.ytheatre.app",
+    "productName": "YTheatre",
+    "win": {
+      "target": "nsis"
+    },
+    "directories": {
+      "output": "build"
+    }
   },
   "author": "Ethan Hazel",
   "license": "ISC",
   "description": "Simple youtube client that uses the TV interface with basic extension support",
   "devDependencies": {
     "electron": "^37.2.2",
-    "electron-packager": "^17.1.2"
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "electron-updater": "^6.6.2"
   }
 }

@@ -3,6 +3,10 @@ const session = require("electron").session;
 const path = require("path");
 const fs = require("fs");
 const os = require("os");
+const { autoUpdater } = require("electron-updater");
+
+autoUpdater.autoDownload = false;
+autoUpdater.autoInstallOnAppQuit = true;
 
 // Base data directory in Documents
 const homeDir = os.homedir();
@@ -113,4 +117,6 @@ app.whenReady().then(async () => {
     }
   }
   createWindow();
+
+  autoUpdater.checkForUpdates();
 });
