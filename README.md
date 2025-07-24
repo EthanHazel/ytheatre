@@ -7,7 +7,7 @@ YTheatre is a simple electron app that connects to the main YouTube website with
 ### Features
 
 - **Chrome Extention Support**
-  - For a list of recomended and supported extensions, and howw to install them, visit the [supported extensions page](https://www.ytheatre.com/extensions)
+  - For a list of recomended and supported extensions, and howw to install them, visit the [supported extensions page](https://www.ytheatre.app/extensions)
 - **Controller Support**
   - Use any controller that is officially recognized by your system
 - **Display Configuration**
@@ -15,6 +15,9 @@ YTheatre is a simple electron app that connects to the main YouTube website with
 
 ---
 
-I don't make any money off of this project and prefer to not get donations for it due to the nature of it being just a simple modded client. If you'd like to support meaningful work, explore great causes on my [support page](https://ehazel.com/support).
+I don't make any money off of this project and prefer to not get donations for it due to the nature of it being just a simple modded client. Consider supporting one of these other projects instead.
+
+- [SponsorBlock](https://sponsor.ajay.app/donate/)
+- [Cobalt](https://donate.stripe.com/3cs2cc6ew1Qda4wbII)
 
 YTheatre isn't associated with YouTube in any form.
