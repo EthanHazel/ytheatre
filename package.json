@@ -1,7 +1,7 @@
 {
   "name": "ytheatre",
   "productName": "YTheatre",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "main.js",
   "homepage": "https://www.ytheatre.app",
   "repository": "https://github.com/EthanHazel/ytheatre",
@@ -16,7 +16,8 @@
       "target": "nsis"
     },
     "directories": {
-      "output": "build"
+      "output": "build",
+      "buildResources": "resources"
     },
     "publish": [
       {
