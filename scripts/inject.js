@@ -13,6 +13,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+const HIDE_DELAY = 10_000;
+let hideTimer;
+
+function hideCursor() {
+  document.body.style.cursor = "none";
+}
+
+function resetCursorTimer() {
+  document.body.style.cursor = "auto";
+  clearTimeout(hideTimer);
+  hideTimer = setTimeout(hideCursor, HIDE_DELAY);
+}
+
+window.addEventListener("mousemove", resetCursorTimer);
+window.addEventListener("mousedown", resetCursorTimer);
+window.addEventListener("keydown", resetCursorTimer);
+
+hideTimer = setTimeout(hideCursor, HIDE_DELAY);
+
 document.addEventListener("DOMContentLoaded", () => {
   const buttonStates = {
     dpadUp: false,
