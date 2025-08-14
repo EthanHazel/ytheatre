@@ -1,23 +1,28 @@
+<div align="center">
+  <img src="resources/icon.ico" alt="YTheatre Icon" width="128" height="128" />
+
 # YTheatre
 
-## Simple YouTube TV Interface for Desktop with extension support
+**Simple YouTube TV Interface for Desktop**
 
-YTheatre is a simple electron app that connects to the main YouTube website with a spoofed user agent to appear as a smart tv.
+YTheatre is an Electron application that connects to YouTube, disguising itself as a smart TV through a spoofed user agent. This allows you to enjoy the TV interface on your desktop.
 
-### Features
+For more info, visit the official site at [ytheatre.app](https://www.ytheatre.app/)
 
-- **Chrome Extention Support**
-  - For a list of recomended and supported extensions, and howw to install them, visit the [supported extensions page](https://www.ytheatre.app/extensions)
-- **Controller Support**
-  - Use any controller that is officially recognized by your system
-- **Display Configuration**
-  - Start in fullscreen and choose which display you'd like
+</div>
 
 ---
 
-I don't make any money off of this project and prefer to not get donations for it due to the nature of it being just a simple modded client. Consider supporting one of these other projects instead.
+## Features
 
-- [SponsorBlock](https://sponsor.ajay.app/donate/)
-- [Cobalt](https://donate.stripe.com/3cs2cc6ew1Qda4wbII)
+- **Chrome Extention Support**
+  - For a list of recomended and supported extensions, and how to install them, visit the [recomended extensions page](https://www.ytheatre.app/extensions)
+- **Controller Support**
+  - Use any controller that is officially recognized by your system
+- **Display Configuration**
+  - Choose which display to launch the application on (second monitor, TV, etc)
+  - Can be configured to start in fullscreen mode
+
+---
 
 YTheatre isn't associated with YouTube in any form.
