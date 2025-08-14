@@ -75,6 +75,9 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, "scripts/inject.js"),
     },
+    useContentSize: true,
+    backgroundColor: "#0f0f0f",
+    transparent: false,
   };
 
   if (config.insetTitleBar) {

@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     analogRight: false,
     buttonA: false,
     buttonB: false,
+    buttonX: false,
   };
 
   const stateToKeyMap = {
@@ -57,6 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     analogRight: "right",
     buttonA: "enter",
     buttonB: "escape",
+    buttonX: "backspace",
   };
 
   const keyMappings = {
@@ -66,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     right: ["ArrowRight", 39],
     enter: ["Enter", 13],
     escape: ["Escape", 27],
+    backspace: ["Backspace", 8],
   };
 
   // Debounce and repeat settings
@@ -145,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Face buttons
       handleButtonState("buttonA", gp.buttons[0]?.pressed);
       handleButtonState("buttonB", gp.buttons[1]?.pressed);
+      handleButtonState("buttonX", gp.buttons[2]?.pressed);
     }
     rafId = requestAnimationFrame(processGamepad);
   }

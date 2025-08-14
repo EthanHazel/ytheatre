@@ -1,13 +1,14 @@
 {
   "name": "ytheatre",
   "productName": "YTheatre",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "main": "main.js",
   "homepage": "https://www.ytheatre.app",
   "repository": "https://github.com/EthanHazel/ytheatre",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder -p always"
+    "build": "electron-builder -p always",
+    "debug-build": "electron-builder"
   },
   "build": {
     "appId": "com.ytheatre.app",
